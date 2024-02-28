@@ -55,7 +55,7 @@ as you build software, those are your main performance concerns.
 It's not within the scope of the course to provide an indepth understanding of computers and computer hardware.
 Here's a great primer by Tom Scott to understand more about what your computer is doing under the hood.
 
-<!-- livebook:{"attrs":{"source":"YouTube.new(\"https://www.youtube.com/watch?v=Z5JC9Ve1sfI\")\n","title":"Tom Scott: The Fetch-Execute Cycle: What's Your Computer Actually Doing?"},"chunks":null,"kind":"Elixir.HiddenCell","livebook_object":"smart_cell"} -->
+<!-- livebook:{"attrs":"eyJzb3VyY2UiOiJZb3VUdWJlLm5ldyhcImh0dHBzOi8vd3d3LnlvdXR1YmUuY29tL3dhdGNoP3Y9WjVKQzlWZTFzZklcIilcbiIsInRpdGxlIjoiVG9tIFNjb3R0OiBUaGUgRmV0Y2gtRXhlY3V0ZSBDeWNsZTogV2hhdCdzIFlvdXIgQ29tcHV0ZXIgQWN0dWFsbHkgRG9pbmc/In0","chunks":null,"kind":"Elixir.HiddenCell","livebook_object":"smart_cell"} -->
 
 ```elixir
 YouTube.new("https://www.youtube.com/watch?v=Z5JC9Ve1sfI")
@@ -176,7 +176,7 @@ goes down because the `list` is no longer in memory.
 
 For more on Memory, there is a more indepth video by Crash Course Computer Science.
 
-<!-- livebook:{"attrs":{"source":"YouTube.new(\"https://www.youtube.com/watch?v=fpnE6UAfbtU\")","title":"Registers and Ram: Crash Course Computer Science"},"chunks":null,"kind":"Elixir.HiddenCell","livebook_object":"smart_cell"} -->
+<!-- livebook:{"attrs":"eyJzb3VyY2UiOiJZb3VUdWJlLm5ldyhcImh0dHBzOi8vd3d3LnlvdXR1YmUuY29tL3dhdGNoP3Y9ZnBuRTZVQWZidFVcIikiLCJ0aXRsZSI6IlJlZ2lzdGVycyBhbmQgUmFtOiBDcmFzaCBDb3Vyc2UgQ29tcHV0ZXIgU2NpZW5jZSJ9","chunks":null,"kind":"Elixir.HiddenCell","livebook_object":"smart_cell"} -->
 
 ```elixir
 YouTube.new("https://www.youtube.com/watch?v=fpnE6UAfbtU")
@@ -194,7 +194,7 @@ exist during the runtime of the program.
 
 For more on memory and storage, you can watch this video by Crash Course Computer Science.
 
-<!-- livebook:{"attrs":{"source":"YouTube.new(\"https://www.youtube.com/watch?v=TQCr9RV7twk\")","title":"Memory & Storage: Crash Course Computer Science"},"chunks":null,"kind":"Elixir.HiddenCell","livebook_object":"smart_cell"} -->
+<!-- livebook:{"attrs":"eyJzb3VyY2UiOiJZb3VUdWJlLm5ldyhcImh0dHBzOi8vd3d3LnlvdXR1YmUuY29tL3dhdGNoP3Y9VFFDcjlSVjd0d2tcIikiLCJ0aXRsZSI6Ik1lbW9yeSAmIFN0b3JhZ2U6IENyYXNoIENvdXJzZSBDb21wdXRlciBTY2llbmNlIn0","chunks":null,"kind":"Elixir.HiddenCell","livebook_object":"smart_cell"} -->
 
 ```elixir
 YouTube.new("https://www.youtube.com/watch?v=TQCr9RV7twk")
@@ -225,7 +225,7 @@ Enum.map(1..10_000_000, fn each -> each + 2 end)
 
 For more on the CPU there is an great video by Crash Course Computer Science.
 
-<!-- livebook:{"attrs":{"source":"YouTube.new(\"https://www.youtube.com/watch?v=FZGugFqdr60\")","title":"The Central Processing Unit (CPU) Crash Course Computer Science"},"chunks":null,"kind":"Elixir.HiddenCell","livebook_object":"smart_cell"} -->
+<!-- livebook:{"attrs":"eyJzb3VyY2UiOiJZb3VUdWJlLm5ldyhcImh0dHBzOi8vd3d3LnlvdXR1YmUuY29tL3dhdGNoP3Y9RlpHdWdGcWRyNjBcIikiLCJ0aXRsZSI6IlRoZSBDZW50cmFsIFByb2Nlc3NpbmcgVW5pdCAoQ1BVKSBDcmFzaCBDb3Vyc2UgQ29tcHV0ZXIgU2NpZW5jZSJ9","chunks":null,"kind":"Elixir.HiddenCell","livebook_object":"smart_cell"} -->
 
 ```elixir
 YouTube.new("https://www.youtube.com/watch?v=FZGugFqdr60")
