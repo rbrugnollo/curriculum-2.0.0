@@ -68,7 +68,7 @@ this **after** creating the folder structure above to get more practice moving b
 
 > Names were generated using [behindthename.com](https://www.behindthename.com/random/random.php?number=1&sets=1&gender=both&surname=&all=yes.)
 
-<!-- livebook:{"attrs":{},"chunks":null,"kind":"Elixir.HiddenCell","livebook_object":"smart_cell"} -->
+<!-- livebook:{"attrs":"e30","chunks":null,"kind":"Elixir.HiddenCell","livebook_object":"smart_cell"} -->
 
 ```elixir
 
