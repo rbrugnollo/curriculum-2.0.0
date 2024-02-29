@@ -56,7 +56,10 @@ blank3 = "code"
 Enter your solution below.
 
 ```elixir
-
+var_1 = "machine"
+var_2 = "coffee"
+var_3 = "code"
+"A programmer is a " <> var_1 <> " that turns " <> var_2 <> " into " <> var_3 <> "."
 ```
 
 ## String Interpolation Madlib
@@ -81,7 +84,10 @@ blank3 = "foobar"
 Enter your solution below.
 
 ```elixir
-
+var_1 = "programmer"
+var_2 = "coffee"
+var_3 = "code"
+"#{var_1} and #{var_2} combined makes #{var_3}."
 ```
 
 ## Commit Your Progress
