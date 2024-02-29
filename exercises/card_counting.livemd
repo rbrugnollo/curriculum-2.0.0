@@ -84,7 +84,9 @@ high = 1
 Enter your solution below.
 
 ```elixir
-
+low = -1
+normal = 0
+high = 1
 ```
 
 ## High Card
@@ -104,7 +106,8 @@ initial_count + high
 Enter your solution below.
 
 ```elixir
-
+count = 0
+count = count + high
 ```
 
 ## Low Card
@@ -124,7 +127,8 @@ initial_count + low
 Enter your solution below.
 
 ```elixir
-
+count = 0
+count = count + low
 ```
 
 ## Multiple Cards
@@ -146,7 +150,8 @@ You could omit the **normal** cards or allow **high** and **low** cards to balan
 Enter your solution below.
 
 ```elixir
-
+count = 5
+count = count + 5 * high + 2 * low + 2 * normal
 ```
 
 ## Bonus: Determining Card Values
@@ -188,7 +193,32 @@ You could omit the **normal** cards or allow **high** and **low** cards to balan
 Enter your solution below.
 
 ```elixir
+defmodule Calc do
+  def deal do
+    Enum.random(1..13)
+  end
 
+  def card(n) do
+    if n > 9 do
+      +1
+    else
+      if n > 6 do
+        0
+      else
+        -1
+      end
+    end
+  end
+
+  def cardValue do
+    card(deal())
+  end
+end
+
+count = 0
+count = count + Calc.cardValue()
+count = count + Calc.cardValue()
+count = count + Calc.cardValue()
 ```
 
 ## Commit Your Progress
