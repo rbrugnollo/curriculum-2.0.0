@@ -97,10 +97,10 @@ in Elixir are unbounded, meaning they have no maximum size.
 Contrast that with a language like JavaScript which has a maximum safe integer size of `9007199254740991`.
 Elixir makes that look tiny!
 
-<!-- livebook:{"attrs":{"code":"biggest_integer = 1","source":"Kino.Markdown.new(~s(\ninteger: #{biggest_integer}\\n\ndigits: #{biggest_integer |> Integer.digits() |> Enum.count()}\n))","title":"Biggest Integer Visual"},"chunks":null,"kind":"Elixir.Visual","livebook_object":"smart_cell"} -->
+<!-- livebook:{"attrs":"eyJjb2RlIjoiYmlnZ2VzdF9pbnRlZ2VyID0gOTAwNzE5OTI1NDc0MDk5MSIsInNvdXJjZSI6Iktpbm8uTWFya2Rvd24ubmV3KH5zKFxuaW50ZWdlcjogI3tiaWdnZXN0X2ludGVnZXJ9XFxuXG5kaWdpdHM6ICN7YmlnZ2VzdF9pbnRlZ2VyIHw+IEludGVnZXIuZGlnaXRzKCkgfD4gRW51bS5jb3VudCgpfVxuKSkiLCJ0aXRsZSI6dHJ1ZX0","chunks":null,"kind":"Elixir.Visual","livebook_object":"smart_cell"} -->
 
 ```elixir
-biggest_integer = 1
+biggest_integer = 9_007_199_254_740_991
 Kino.Markdown.new(~s(
 integer: #{biggest_integer}\n
 digits: #{biggest_integer |> Integer.digits() |> Enum.count()}
@@ -112,7 +112,7 @@ grows! Move on to the next section when you're satisfied that integers are truly
 
 To avoid distorting your screen we use mathematical notation $10^{n}$ after 80 digits.
 
-<!-- livebook:{"attrs":{"source":"SmartAnimation.new(1..100_000_000, fn i ->\n  max = 10 ** 80\n  integer_display = (10 ** i < max && 10 ** i) || \"$10^{#{i}}$\"\n\n  Kino.Markdown.new(\"\"\"\n  integer: #{integer_display}\\n\n  digits: #{Integer.digits(10 ** i) |> Enum.count()}\n  \"\"\")\nend)","title":"Animation Source: (Hidden: instructors Only)"},"chunks":null,"kind":"Elixir.HiddenCell","livebook_object":"smart_cell"} -->
+<!-- livebook:{"attrs":"eyJzb3VyY2UiOiJTbWFydEFuaW1hdGlvbi5uZXcoMS4uMTAwXzAwMF8wMDAsIGZuIGkgLT5cbiAgbWF4ID0gMTAgKiogODBcbiAgaW50ZWdlcl9kaXNwbGF5ID0gKDEwICoqIGkgPCBtYXggJiYgMTAgKiogaSkgfHwgXCIkMTBeeyN7aX19JFwiXG5cbiAgS2luby5NYXJrZG93bi5uZXcoXCJcIlwiXG4gIGludGVnZXI6ICN7aW50ZWdlcl9kaXNwbGF5fVxcblxuICBkaWdpdHM6ICN7SW50ZWdlci5kaWdpdHMoMTAgKiogaSkgfD4gRW51bS5jb3VudCgpfVxuICBcIlwiXCIpXG5lbmQpIiwidGl0bGUiOiJBbmltYXRpb24gU291cmNlOiAoSGlkZGVuOiBpbnN0cnVjdG9ycyBPbmx5KSJ9","chunks":null,"kind":"Elixir.HiddenCell","livebook_object":"smart_cell"} -->
 
 ```elixir
 SmartAnimation.new(1..100_000_000, fn i ->
@@ -166,10 +166,10 @@ For example, you might want to represent a progress bar as a percentage.
 In the Elixir cell below, try changing the float `percentage` to any float between `0.0` and `100.0`
 and see how the loading bar changes! Replace `50.0` with your answer and reevaluate the cell.
 
-<!-- livebook:{"attrs":{"code":"percentage = 50.0","source":"Kino.Markdown.new(~s(\n  <div style=\\\"height: 20px; width: 100%; background-color: grey\\\">\n  <div style=\\\"height: 20px; width: #{percentage}%; background-color: green; color: white;\\\">#{percentage}%</div>\n  </div>\n))","title":"Loading Bar Visual"},"chunks":null,"kind":"Elixir.Visual","livebook_object":"smart_cell"} -->
+<!-- livebook:{"attrs":"eyJjb2RlIjoicGVyY2VudGFnZSA9IDgzLjUiLCJzb3VyY2UiOiJLaW5vLk1hcmtkb3duLm5ldyh+cyhcbiAgPGRpdiBzdHlsZT1cXFwiaGVpZ2h0OiAyMHB4OyB3aWR0aDogMTAwJTsgYmFja2dyb3VuZC1jb2xvcjogZ3JleVxcXCI+XG4gIDxkaXYgc3R5bGU9XFxcImhlaWdodDogMjBweDsgd2lkdGg6ICN7cGVyY2VudGFnZX0lOyBiYWNrZ3JvdW5kLWNvbG9yOiBncmVlbjsgY29sb3I6IHdoaXRlO1xcXCI+I3twZXJjZW50YWdlfSU8L2Rpdj5cbiAgPC9kaXY+XG4pKSIsInRpdGxlIjp0cnVlfQ","chunks":null,"kind":"Elixir.Visual","livebook_object":"smart_cell"} -->
 
 ```elixir
-percentage = 50.0
+percentage = 83.5
 Kino.Markdown.new(~s(
   <div style=\"height: 20px; width: 100%; background-color: grey\">
   <div style=\"height: 20px; width: #{percentage}%; background-color: green; color: white;\">#{percentage}%</div>
@@ -215,7 +215,7 @@ provide utilities for working with money.
 In the Elixir cell below, enter some floating-point addition that returns an unexpected result.
 
 ```elixir
-
+1.3 + 1.6
 ```
 
 ## Arithmetic Operators
@@ -281,7 +281,7 @@ to write code like this, but it's useful to know you can.
 In the Elixir cell below, add two massive numbers together that you couldn't do in your head.
 
 ```elixir
-
+rem(6, 2)
 ```
 
 ## Subtraction
@@ -319,7 +319,7 @@ Subtracting a negative is the same as adding a positive.
 In the Elixir cell below, subtract two massive numbers together.
 
 ```elixir
-
+1000 - 2
 ```
 
 ## Multiplication
@@ -348,7 +348,7 @@ You can multiply integers and floats both positive and negative in combination, 
 In the Elixir cell below, multiply two massive numbers together.
 
 ```elixir
-
+2 * 8
 ```
 
 ## Division
@@ -390,13 +390,13 @@ In the Elixir cell below, divide `223` by `71` using `/` to get a nice slice of 
 should be close to `3.14`.
 
 ```elixir
-
+223 / 71
 ```
 
 Divide `100` by `3` using `div`. Your answer should be `33`.
 
 ```elixir
-
+div(100, 3)
 ```
 
 ## Exponents
@@ -408,7 +408,7 @@ That means that `10 ** 2` is 10 to the power of 2. Mathematically that's the sam
 `10 ** 3` means `10 * 10 * 10`. If you would like a more in-depth explanation of exponents, there's
 a video by Khan Academy.
 
-<!-- livebook:{"attrs":{"source":"YouTube.new(\"https://www.youtube.com/watch?v=XZRQhkii0h0\")","title":"Introduction To Exponents"},"chunks":null,"kind":"Elixir.HiddenCell","livebook_object":"smart_cell"} -->
+<!-- livebook:{"attrs":"eyJzb3VyY2UiOiJZb3VUdWJlLm5ldyhcImh0dHBzOi8vd3d3LnlvdXR1YmUuY29tL3dhdGNoP3Y9WFpSUWhraWkwaDBcIikiLCJ0aXRsZSI6IkludHJvZHVjdGlvbiBUbyBFeHBvbmVudHMifQ","chunks":null,"kind":"Elixir.HiddenCell","livebook_object":"smart_cell"} -->
 
 ```elixir
 YouTube.new("https://www.youtube.com/watch?v=XZRQhkii0h0")
@@ -432,7 +432,7 @@ In the Elixir cell below, Use the `**` operator to determine `10` to the power o
 </details>
 
 ```elixir
-
+10 ** 214
 ```
 
 ## BEDMAS
@@ -508,7 +508,7 @@ Use brackets `()` to alter the return value of the expression below to be `200` 
 </details>
 
 ```elixir
-10 + 10 * 10
+(10 + 10) * 10
 ```
 
 ## Remainder
@@ -520,7 +520,7 @@ That's because `2` goes into `5` twice and leaves a remainder of `1`.
 
 If you're not familiar with remainders, here's a video by Khan Academy.
 
-<!-- livebook:{"attrs":{"source":"YouTube.new(\"https://www.youtube.com/watch?v=P1qyjdh_sIw\")\n","title":"Introduction to Remainders"},"chunks":null,"kind":"Elixir.HiddenCell","livebook_object":"smart_cell"} -->
+<!-- livebook:{"attrs":"eyJzb3VyY2UiOiJZb3VUdWJlLm5ldyhcImh0dHBzOi8vd3d3LnlvdXR1YmUuY29tL3dhdGNoP3Y9UDFxeWpkaF9zSXdcIilcbiIsInRpdGxlIjoiSW50cm9kdWN0aW9uIHRvIFJlbWFpbmRlcnMifQ","chunks":null,"kind":"Elixir.HiddenCell","livebook_object":"smart_cell"} -->
 
 ```elixir
 YouTube.new("https://www.youtube.com/watch?v=P1qyjdh_sIw")
@@ -549,7 +549,7 @@ a limit. You don't need to know how to do this yet, but it will be helpful in fu
 Here we have an animation to show the remainder of a growing number divided by 10 to help you
 visualize this effect.
 
-<!-- livebook:{"attrs":{"source":"SmartAnimation.new(1..100_000_000, fn i ->\n  Kino.Markdown.new(\"\"\"\n  ```elixir\n  rem(#{i}, 10) = #{rem(i, 10)}\n  ```\n  \"\"\")\nend)","title":"Animation Source (Hidden: instructors Only)"},"chunks":null,"kind":"Elixir.HiddenCell","livebook_object":"smart_cell"} -->
+<!-- livebook:{"attrs":"eyJzb3VyY2UiOiJTbWFydEFuaW1hdGlvbi5uZXcoMS4uMTAwXzAwMF8wMDAsIGZuIGkgLT5cbiAgS2luby5NYXJrZG93bi5uZXcoXCJcIlwiXG4gIGBgYGVsaXhpclxuICByZW0oI3tpfSwgMTApID0gI3tyZW0oaSwgMTApfVxuICBgYGBcbiAgXCJcIlwiKVxuZW5kKSIsInRpdGxlIjoiQW5pbWF0aW9uIFNvdXJjZSAoSGlkZGVuOiBpbnN0cnVjdG9ycyBPbmx5KSJ9","chunks":null,"kind":"Elixir.HiddenCell","livebook_object":"smart_cell"} -->
 
 ````elixir
 SmartAnimation.new(1..100_000_000, fn i ->
@@ -601,7 +601,7 @@ rem(10, 3)
 Enter your solution below.
 
 ```elixir
-
+rem(10, 3)
 ```
 
 ## Further Reading
