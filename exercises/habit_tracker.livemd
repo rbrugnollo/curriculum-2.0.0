@@ -65,7 +65,9 @@ small = 5
 Enter your solution below.
 
 ```elixir
-
+large = 30
+medium = 20
+small = 5
 ```
 
 ## Small, Medium, Large
@@ -95,7 +97,7 @@ small + medium + large
 Enter your answer in the code cell below.
 
 ```elixir
-
+total = 1 * small + 1 * medium + 1 * large
 ```
 
 ## Multiples
@@ -114,7 +116,7 @@ small * 10 + medium * 5 + large * 3
 Enter your answer below.
 
 ```elixir
-
+total = 10 * small + 5 * medium + 3 * large
 ```
 
 ## Progress Bar
@@ -148,6 +150,12 @@ Enter your answer below.
 
 ```
 
+```elixir
+goal = 40
+today = 1 * small + 1 * medium
+percentage = total / goal * 100
+```
+
 ## Penalties And Rewards
 
 To motivate users to complete their habits quickly, we add a time-limit feature where users will receive a `60%` point bonus if they complete their habit early, and a `50%` point penalty if they complete their habit late.
@@ -172,7 +180,10 @@ small * 1.6 * 3 + medium * 2 + large * 2 * 0.5
 Enter your answer below.
 
 ```elixir
-
+early = 1.6
+late = 0.5
+normal = 1
+points = 3 * small * early + 2 * medium * normal + 2 * large * late
 ```
 
 ## Bonus: Add Your Own Feature
@@ -181,7 +192,21 @@ Add your own feature to the habit tracking app. Use comments to describe your fe
 how it would affect calculating the total score and/or the total percentage of completed habits.
 
 ```elixir
+# if total of small habits are greater than the sum of medium and large habits, penalize with 30% points
+early = 1.6
+late = 0.5
+normal = 1
+small_habits = 10
+medium_habits = 3
+large_habits = 1
 
+points =
+  small_habits * small * early + medium_habits * medium * normal + large_habits * large * late
+
+cond do
+  small_habits > medium_habits + large_habits -> points * 0.7
+  true -> points
+end
 ```
 
 ## Commit Your Progress
