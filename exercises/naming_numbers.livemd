@@ -84,7 +84,15 @@ naming_numbers.(1)
 Enter your solution below.
 
 ```elixir
+naming_numbers = fn number ->
+  case number do
+    0 -> "zero"
+    1 -> "one"
+    2 -> "two"
+  end
+end
 
+naming_numbers.(2)
 ```
 
 ## Numbering Names
@@ -181,7 +189,15 @@ flowchart
 </details>
 
 ```elixir
+numbering_names = fn number_name ->
+  case String.downcase(number_name) do
+    "zero" -> 0
+    "one" -> 1
+    "two" -> 2
+  end
+end
 
+numbering_names.("Zero")
 ```
 
 ## Commit Your Progress
