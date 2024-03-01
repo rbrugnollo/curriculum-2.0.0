@@ -212,7 +212,7 @@ Under the hood, when the function runs, the parameter is bound to the argument's
 
 Let's break down how a function executes step by step in the following slideshow.
 
-<!-- livebook:{"attrs":{"source":"frames =     [\n      \"\n  First, we define the `double` function and call it.\n  ```elixir\n  double = fn number -> number * 2 end\n  double.(3)\n  ```\n  \",\n      \"\n  The `double` function executes in place of the `double.(call)` with `number` bound to `3`.\n  ```elixir\n  double = fn number -> number * 2 end\n  fn 3 -> 3 * 2 end\n  ```\n  \",\n      \"\n  The function evaluates the function body between the `->` and the `end`\n  ```elixir\n  double = fn number -> number * 2 end\n  3 * 2\n  ```\n  \",\n      \"\n  `3` * `2` is `6`, so the function call returns `6`.\n  ```elixir\n  double = fn number -> number * 2 end\n  6\n  ```\n  \"\n    ]\n\nSmartAnimation.new(0..Enum.count(frames) - 1, fn i ->\n    Enum.at(frames, i) |> Kino.Markdown.new()\nend)","title":"Function Flow"},"chunks":null,"kind":"Elixir.HiddenCell","livebook_object":"smart_cell"} -->
+<!-- livebook:{"attrs":"eyJzb3VyY2UiOiJmcmFtZXMgPSAgICAgW1xuICAgICAgXCJcbiAgRmlyc3QsIHdlIGRlZmluZSB0aGUgYGRvdWJsZWAgZnVuY3Rpb24gYW5kIGNhbGwgaXQuXG4gIGBgYGVsaXhpclxuICBkb3VibGUgPSBmbiBudW1iZXIgLT4gbnVtYmVyICogMiBlbmRcbiAgZG91YmxlLigzKVxuICBgYGBcbiAgXCIsXG4gICAgICBcIlxuICBUaGUgYGRvdWJsZWAgZnVuY3Rpb24gZXhlY3V0ZXMgaW4gcGxhY2Ugb2YgdGhlIGBkb3VibGUuKGNhbGwpYCB3aXRoIGBudW1iZXJgIGJvdW5kIHRvIGAzYC5cbiAgYGBgZWxpeGlyXG4gIGRvdWJsZSA9IGZuIG51bWJlciAtPiBudW1iZXIgKiAyIGVuZFxuICBmbiAzIC0+IDMgKiAyIGVuZFxuICBgYGBcbiAgXCIsXG4gICAgICBcIlxuICBUaGUgZnVuY3Rpb24gZXZhbHVhdGVzIHRoZSBmdW5jdGlvbiBib2R5IGJldHdlZW4gdGhlIGAtPmAgYW5kIHRoZSBgZW5kYFxuICBgYGBlbGl4aXJcbiAgZG91YmxlID0gZm4gbnVtYmVyIC0+IG51bWJlciAqIDIgZW5kXG4gIDMgKiAyXG4gIGBgYFxuICBcIixcbiAgICAgIFwiXG4gIGAzYCAqIGAyYCBpcyBgNmAsIHNvIHRoZSBmdW5jdGlvbiBjYWxsIHJldHVybnMgYDZgLlxuICBgYGBlbGl4aXJcbiAgZG91YmxlID0gZm4gbnVtYmVyIC0+IG51bWJlciAqIDIgZW5kXG4gIDZcbiAgYGBgXG4gIFwiXG4gICAgXVxuXG5TbWFydEFuaW1hdGlvbi5uZXcoMC4uRW51bS5jb3VudChmcmFtZXMpIC0gMSwgZm4gaSAtPlxuICAgIEVudW0uYXQoZnJhbWVzLCBpKSB8PiBLaW5vLk1hcmtkb3duLm5ldygpXG5lbmQpIiwidGl0bGUiOiJGdW5jdGlvbiBGbG93In0","chunks":null,"kind":"Elixir.HiddenCell","livebook_object":"smart_cell"} -->
 
 ````elixir
 frames = [
@@ -298,7 +298,9 @@ is_even? = fn int -> rem(int, 2) == 0 end
 Enter your solution below.
 
 ```elixir
+is_even? = fn number -> rem(number, 2) == 0 end
 
+is_even?.(1)
 ```
 
 ## Multi-Parameter Functions
@@ -364,7 +366,8 @@ calculate_force = fn mass, acceleration -> mass * acceleration end
 Enter your solution below.
 
 ```elixir
-
+calculate_force = fn mass, acceleration -> mass * acceleration end
+calculate_force.(10, 10)
 ```
 
 ## Shorthand Syntax
@@ -413,7 +416,8 @@ subtract = &(&1 - &2)
 Enter your solution below.
 
 ```elixir
-
+substract = &(&1 - &2)
+substract.(5, 2)
 ```
 
 ### Your Turn
@@ -439,7 +443,8 @@ multiply_three = &(&1 * &2 * &3)
 Enter your solution below.
 
 ```elixir
-
+multiply_three = &(&1 * &2 * &3)
+multiply_three.(1, 2, 3)
 ```
 
 ## First-class Functions
@@ -527,7 +532,8 @@ call_with_10_and_20 = fn callback -> callback.(10, 20) end
 Enter your solution below.
 
 ```elixir
-call_with_10_and_20 = nil
+call_with_10_and_20 = fn callback -> callback.(10, 20) end
+call_with_10_and_20.(&(&1 + &2))
 ```
 
 ## Pipe Operator
@@ -640,7 +646,10 @@ multiply = fn int1, int2 -> int1 * int2 end
 Enter your solution below.
 
 ```elixir
-
+add = &(&1 + &2)
+subtract = &(&1 - &2)
+multiply = &(&1 * &2)
+10 |> add.(2) |> multiply.(5) |> subtract.(4)
 ```
 
 ## Commit Your Progress
