@@ -120,7 +120,7 @@ end
 Call the `MutliParamExample.call/3` function with different arguments.
 
 ```elixir
-
+MultiParamExample.call(1, 2, 3)
 ```
 
 ## Internal Module Functions
@@ -318,7 +318,13 @@ end
 Enter your solution below.
 
 ```elixir
+defmodule Languages.Portuguese do
+  def greeting do
+    "Fala Galera!"
+  end
+end
 
+Languages.Portuguese.greeting()
 ```
 
 ### Nested Modules
@@ -357,15 +363,15 @@ We use the `@` symbol to define a compile-time module attribute.
 
 ```elixir
 defmodule Hero do
-  @name "Spider-Man"
-  @nemesis "Green Goblin"
+  @name "Batman"
+  @nemesis "Jocker"
 
   def introduce do
     "Hello, my name is #{@name}!"
   end
 
   def catchphrase do
-    "I'm your friendly neighborhood #{@name}!"
+    "I'm #{@name}!"
   end
 
   def defeat do
@@ -516,7 +522,17 @@ end
 </details>
 
 ```elixir
+defmodule Math do
+  def add(n1, n2) do
+    n1 + n2
+  end
 
+  def add(n1, n2, n3) do
+    add(n1, n2) + n3
+  end
+end
+
+Math.add(1, 2, 3)
 ```
 
 ## Default Arguments
@@ -583,7 +599,13 @@ Greeting.hello("Andrew")
 ```
 
 ```elixir
+defmodule Greeting do
+  def hello(name \\ "Rafael") do
+    "Hello #{name}!"
+  end
+end
 
+Greeting.hello("Paula")
 ```
 
 ## Documentation
@@ -696,25 +718,26 @@ If this is the case, you either have to fix your code, or remove/comment the cra
 Uncomment the following code and evaluate the cell to see an example. Re-comment your code to avoid crashing the livebook as you continue with the lesson.
 
 ```elixir
-# defmodule DoctestCrash Do
-# @moduledoc """
-# DoctestCrash
+defmodule DoctestCrash do
+  @moduledoc """
+  DoctestCrash
 
-# Explains Doctest Crashes With Examples
-# """
+  Explains Doctest Crashes With Examples
+  """
 
-# @doc """
-# Purposely Crashes Doctest Using Invalid Pattern Matching
+  @doc """
+  Purposely Crashes Doctest Using Invalid Pattern Matching
 
-# ## Examples
+  ## Examples
 
-# iex> {} = DoctestCrash.crash()
-# "2"
-# """
-# def crash do
+    iex> "2" = DoctestCrash.crash()
+  """
+  def crash do
+    "2"
+  end
+end
 
-# end
-# end
+DoctestCrash.crash()
 ```
 
 ### Your Turn
