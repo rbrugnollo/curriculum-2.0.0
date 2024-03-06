@@ -125,9 +125,21 @@ defmodule Pokemon do
       iex> Pokemon.attack(attacker, defender)
       %Pokemon{name: "Bulbasaur", type: :grass, health: 10.0, attack: 5, speed: 20}
   """
-  defstruct []
+  @strong_attack 2
+  @weak_attack 0.5
+  @normal_attack 1
+  @strong_attack_list [{:fire, :grass}, {:grass, :water}, {:water, :fire}]
+  defstruct [:name, :type, :speed, health: 20, attack: 5]
 
   def attack(attacker, defender) do
+    attack_modifier =
+      cond do
+        attacker.type === defender.type -> @normal_attack
+        {attacker.type, defender.type} in @strong_attack_list -> @strong_attack
+        true -> @weak_attack
+      end
+
+    %Pokemon{defender | health: defender.health - attacker.attack * attack_modifier}
   end
 end
 ```
