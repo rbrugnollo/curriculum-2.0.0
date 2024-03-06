@@ -384,7 +384,7 @@ Enum.map(1..10, fn integer -> "#{integer}" end)
 Enter your solution below.
 
 ```elixir
-
+Enum.map(1..10, &"#{&1}")
 ```
 
 ## Enum.reduce/2 And Enum.reduce/3
@@ -415,7 +415,7 @@ The function you provide as the second argument of [Enum.reduce/2](https://hexdo
 
 The first value in the collection will be the initial accumulator value.
 
-<!-- livebook:{"attrs":{"source":"frames = [\n      \"\nFirst, we define the call the [Enum.reduce/2](https://hexdocs.pm/elixir/Enum.html#reduce/2) function with a list, and a function.\n```elixir\nEnum.reduce([1, 2, 3, 4], fn integer, accumulator -> integer + accumulator  end)\n```\n\",\n      \"\nThe first element in the list `1` is the initial accumulator value.\n```elixir\nEnum.reduce([2, 3, 4], fn integer, 1 -> integer + 1  end)\n```\n\",\n      \"\nThe function is called on the next element `2`. The next accumulator is 2 + 1\n```elixir\nEnum.reduce([3, 4], fn 2, 1 -> 2 + 1  end)\n```\n\",\n      \"\nThe function is called on the next element `3`. The next accumulator is 3 + 3\n```elixir\nEnum.reduce([4], fn 3, 3 -> 3 + 3  end)\n```\n\",\n      \"\nThe function is called on the next element `4`. The next accumulator is 4 + 6\n```elixir\nEnum.reduce([], fn 4, 6 -> 4 + 6  end)\n```\n\",\n      \"\n4 + 6 equals 10.\n```elixir\nEnum.reduce([], fn 4, 6 -> 10  end)\n```\n\",\n      \"\n`10` is the last accumulator value, so [Enum.reduce/2](https://hexdocs.pm/elixir/Enum.html#reduce/2) returns `10`.\n```elixir\n                           10\n```\n\"\n    ]\n\nSmartAnimation.new(0..Enum.count(frames) - 1, fn i ->\n    Kino.Markdown.new(Enum.at(frames, i))\nend)","title":"Reduce"},"chunks":null,"kind":"Elixir.HiddenCell","livebook_object":"smart_cell"} -->
+<!-- livebook:{"attrs":"eyJzb3VyY2UiOiJmcmFtZXMgPSBbXG4gICAgICBcIlxuRmlyc3QsIHdlIGRlZmluZSB0aGUgY2FsbCB0aGUgW0VudW0ucmVkdWNlLzJdKGh0dHBzOi8vaGV4ZG9jcy5wbS9lbGl4aXIvRW51bS5odG1sI3JlZHVjZS8yKSBmdW5jdGlvbiB3aXRoIGEgbGlzdCwgYW5kIGEgZnVuY3Rpb24uXG5gYGBlbGl4aXJcbkVudW0ucmVkdWNlKFsxLCAyLCAzLCA0XSwgZm4gaW50ZWdlciwgYWNjdW11bGF0b3IgLT4gaW50ZWdlciArIGFjY3VtdWxhdG9yICBlbmQpXG5gYGBcblwiLFxuICAgICAgXCJcblRoZSBmaXJzdCBlbGVtZW50IGluIHRoZSBsaXN0IGAxYCBpcyB0aGUgaW5pdGlhbCBhY2N1bXVsYXRvciB2YWx1ZS5cbmBgYGVsaXhpclxuRW51bS5yZWR1Y2UoWzIsIDMsIDRdLCBmbiBpbnRlZ2VyLCAxIC0+IGludGVnZXIgKyAxICBlbmQpXG5gYGBcblwiLFxuICAgICAgXCJcblRoZSBmdW5jdGlvbiBpcyBjYWxsZWQgb24gdGhlIG5leHQgZWxlbWVudCBgMmAuIFRoZSBuZXh0IGFjY3VtdWxhdG9yIGlzIDIgKyAxXG5gYGBlbGl4aXJcbkVudW0ucmVkdWNlKFszLCA0XSwgZm4gMiwgMSAtPiAyICsgMSAgZW5kKVxuYGBgXG5cIixcbiAgICAgIFwiXG5UaGUgZnVuY3Rpb24gaXMgY2FsbGVkIG9uIHRoZSBuZXh0IGVsZW1lbnQgYDNgLiBUaGUgbmV4dCBhY2N1bXVsYXRvciBpcyAzICsgM1xuYGBgZWxpeGlyXG5FbnVtLnJlZHVjZShbNF0sIGZuIDMsIDMgLT4gMyArIDMgIGVuZClcbmBgYFxuXCIsXG4gICAgICBcIlxuVGhlIGZ1bmN0aW9uIGlzIGNhbGxlZCBvbiB0aGUgbmV4dCBlbGVtZW50IGA0YC4gVGhlIG5leHQgYWNjdW11bGF0b3IgaXMgNCArIDZcbmBgYGVsaXhpclxuRW51bS5yZWR1Y2UoW10sIGZuIDQsIDYgLT4gNCArIDYgIGVuZClcbmBgYFxuXCIsXG4gICAgICBcIlxuNCArIDYgZXF1YWxzIDEwLlxuYGBgZWxpeGlyXG5FbnVtLnJlZHVjZShbXSwgZm4gNCwgNiAtPiAxMCAgZW5kKVxuYGBgXG5cIixcbiAgICAgIFwiXG5gMTBgIGlzIHRoZSBsYXN0IGFjY3VtdWxhdG9yIHZhbHVlLCBzbyBbRW51bS5yZWR1Y2UvMl0oaHR0cHM6Ly9oZXhkb2NzLnBtL2VsaXhpci9FbnVtLmh0bWwjcmVkdWNlLzIpIHJldHVybnMgYDEwYC5cbmBgYGVsaXhpclxuICAgICAgICAgICAgICAgICAgICAgICAgICAgMTBcbmBgYFxuXCJcbiAgICBdXG5cblNtYXJ0QW5pbWF0aW9uLm5ldygwLi5FbnVtLmNvdW50KGZyYW1lcykgLSAxLCBmbiBpIC0+XG4gICAgS2luby5NYXJrZG93bi5uZXcoRW51bS5hdChmcmFtZXMsIGkpKVxuZW5kKSIsInRpdGxlIjoiUmVkdWNlIn0","chunks":null,"kind":"Elixir.HiddenCell","livebook_object":"smart_cell"} -->
 
 ````elixir
 frames = [
@@ -506,7 +506,7 @@ end)
 Enter your solution below.
 
 ```elixir
-
+1..10 |> Enum.filter(&(rem(&1, 2) == 0)) |> Enum.reduce(0, &(&1 + &2))
 ```
 
 ## Enum.filter
@@ -544,7 +544,7 @@ odd_numbers = Enum.filter(1..10, fn integer -> rem(integer, 2) != 0 end)
 Enter your solution below.
 
 ```elixir
-
+1..10 |> Enum.filter(&(rem(&1, 2) == 0))
 ```
 
 ## Enum.all?/2
@@ -594,7 +594,8 @@ Enum.all?(1..10_000_000, fn integer -> is_integer(integer) end)
 Use [Enum.all/2](https://hexdocs.pm/elixir/Enum.html#all/2) to determine if all of the `colors` in this list of colors are `:green`. You may change the value of `colors` to experiment with [Enum.all/2](https://hexdocs.pm/elixir/Enum.html#all/2).
 
 ```elixir
-colors = [:green, :green, :red]
+colors = [:green, :green, :green]
+Enum.all?(colors, fn c -> c === :green end)
 ```
 
 ## Enum.any?/2
@@ -635,6 +636,7 @@ Use [Enum.any?/2](https://hexdocs.pm/elixir/Enum.html#any?/2) to determine if an
 
 ```elixir
 animals = [:cats, :dogs, :bears, :lions, :penguins]
+Enum.any?(animals, fn a -> a === :cats end)
 ```
 
 ## Enum.count/1
@@ -662,6 +664,7 @@ In the Elixir cell below, count the number of elements in the `collection`. It s
 
 ```elixir
 collection = [1, 2, 3, 4, 5]
+Enum.count(collection)
 ```
 
 ## Enum.find/3
@@ -689,7 +692,7 @@ Enum.find(["h", "e", "l", "l", "o"], 10, fn each -> is_integer(each) end)
 Use [Enum.find/2](https://hexdocs.pm/elixir/Enum.html#find/2) to find the first even integer in this list.
 
 ```elixir
-[1, "2", "three", 4, "five", 6]
+Enum.find([1, "2", "three", 4, "five", 6], fn f -> is_integer(f) and rem(f, 2) === 0 end)
 ```
 
 ## Enum.random/1
@@ -716,7 +719,7 @@ Enum.map(1..10, fn _ -> Enum.random(0..9) end)
 Enter your solution below.
 
 ```elixir
-
+Enum.random(0..9)
 ```
 
 ## Capture Operator And Module Functions
