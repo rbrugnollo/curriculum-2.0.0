@@ -73,7 +73,7 @@ FizzBuzz.run(1..15)
 
 Enter your solution below.
 
-<!-- livebook:{"attrs":{"source":"YouTube.new(\"https://www.youtube.com/watch?v=QPZ0pIK_wsc&ab_channel=TomScott\")","title":"FizzBuzz"},"chunks":null,"kind":"Elixir.HiddenCell","livebook_object":"smart_cell"} -->
+<!-- livebook:{"attrs":"eyJzb3VyY2UiOiJZb3VUdWJlLm5ldyhcImh0dHBzOi8vd3d3LnlvdXR1YmUuY29tL3dhdGNoP3Y9UVBaMHBJS193c2MmYWJfY2hhbm5lbD1Ub21TY290dFwiKSIsInRpdGxlIjoiRml6ekJ1enoifQ","chunks":null,"kind":"Elixir.HiddenCell","livebook_object":"smart_cell"} -->
 
 ```elixir
 YouTube.new("https://www.youtube.com/watch?v=QPZ0pIK_wsc&ab_channel=TomScott")
@@ -93,6 +93,14 @@ defmodule FizzBuzz do
     ["buzz", 11, "fizz", 13, 14, "fizzbuzz"]
   """
   def run(range) do
+    Enum.map(range, fn m ->
+      cond do
+        rem(m, 3) === 0 and rem(m, 5) === 0 -> "fizzbuzz"
+        rem(m, 3) === 0 -> "fizz"
+        rem(m, 5) === 0 -> "buzz"
+        true -> m
+      end
+    end)
   end
 end
 ```
