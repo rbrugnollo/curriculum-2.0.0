@@ -161,7 +161,8 @@ defmodule TicTacToe do
       iex> TicTacToe.at(board, {0, 2})
       "A"
   """
-  def at(board, coordinate) do
+  def at(board, {x, y}) do
+    Enum.at(board, 2 - y) |> Enum.at(x)
   end
 
   @doc """
@@ -179,7 +180,79 @@ defmodule TicTacToe do
       iex> TicTacToe.fill(board, {1, 1}, "O")
       [[nil, nil, nil], [nil, "O", nil], [nil, nil, nil]]
   """
-  def fill(board, coordinate, symbol) do
+  def fill(board, {x, y}, symbol) do
+    board |> List.update_at(2 - y, fn row -> List.replace_at(row, x, symbol) end)
+  end
+
+  @doc """
+  Determine if a player has won the game.
+
+  ## Examples
+
+    Row Wins:
+
+    iex> TicTacToe.winner([["X", "X", "X"], [nil, nil, nil], [nil, nil, nil]])
+    "X"
+    iex> TicTacToe.winner([[nil, nil, nil], ["X", "X", "X"], [nil, nil, nil]])
+    "X"
+    iex> TicTacToe.winner([[nil, nil, nil], [nil, nil, nil], ["X", "X", "X"]])
+    "X"
+
+    Column Wins:
+
+    iex> TicTacToe.winner([["X", nil, nil], ["X", nil, nil], ["X", nil, nil]])
+    "X"
+    iex> TicTacToe.winner([[nil, "X", nil], [nil, "X", nil], [nil, "X", nil]])
+    "X"
+    iex> TicTacToe.winner([[nil, nil, "X"], [nil, nil, "X"], [nil, nil, "X"]])
+    "X"
+
+    Diagonal Wins
+
+    iex> TicTacToe.winner([["X", nil, nil], [nil, "X", nil], [nil, nil, "X"]])
+    "X"
+    iex> TicTacToe.winner([[nil, nil, "X"], [nil, "X", nil], ["X", nil, nil]])
+    "X"
+
+    No Winner
+
+    iex> TicTacToe.winner([[nil, nil, nil], [nil, nil, nil], [nil, nil, nil]])
+    nil
+    iex> TicTacToe.winner([[nil, "X", nil], [nil, "X", nil], [nil, nil, nil]])
+    nil
+
+  """
+  def winner(board) do
+    cond do
+      winner(board, "X") -> "X"
+      winner(board, "O") -> "O"
+      true -> nil
+    end
+  end
+
+  defp winner(board, symbol) do
+    board
+    |> get_rows
+    |> Enum.any?(&row_win?(&1, symbol))
+  end
+
+  defp get_rows(board) do
+    board ++ get_columns_as_rows(board) ++ get_diagonals_as_rows(board)
+  end
+
+  defp get_columns_as_rows(board) do
+    Enum.map(0..2, fn n1 -> Enum.map(0..2, fn n2 -> at(board, {n1, n2}) end) end)
+  end
+
+  defp get_diagonals_as_rows(board) do
+    [
+      Enum.map(0..2, fn n1 -> at(board, {n1, n1}) end),
+      Enum.map(0..2, fn n1 -> at(board, {n1, 2 - n1}) end)
+    ]
+  end
+
+  defp row_win?(row, symbol) do
+    Enum.all?(row, &(&1 === symbol))
   end
 end
 ```
