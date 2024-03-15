@@ -74,16 +74,21 @@ defmodule DataTraversal do
   60
   """
   def sum(keyword_list) do
+    Enum.reduce(keyword_list, 0, fn {_key, v}, acc -> acc + v end)
   end
 
   @doc """
   Aggregate values with common keys in a keyword list.
   Ensure aggregated values are sorted with Enum.sort/1
 
-  iex> DataTraversal.aggregate([key1: 10, key1: 20, key2: 30, key2: 20])
-  [key1: 30, key2: 50]
+  iex> DataTraversal.aggregate([key3: 20, key1: 10, key1: 20, key2: 30, key2: 20])
+  [key1: 30, key2: 50, key3: 20]
   """
   def aggregate(keyword_list) do
+    Enum.reduce(keyword_list, [], fn {key, value}, list ->
+      Keyword.update(list, key, value, fn v -> v + value end)
+    end)
+    |> Enum.sort()
   end
 
   @doc """
@@ -94,6 +99,9 @@ defmodule DataTraversal do
   %{keya: "a", keyb: "b", keyc: "c2"}
   """
   def merge_maps(maps) do
+    Enum.reduce(maps, %{}, fn m, acc ->
+      Map.merge(acc, m)
+    end)
   end
 end
 ```
