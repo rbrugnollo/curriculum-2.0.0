@@ -47,7 +47,7 @@ Reduce is an incredibly powerful tool you can leverage in a wide variety of circ
 
 If you'd like to learn more about reduce, there's an [excellent video](https://github.com/paulfioravanti/presentations/tree/master/everything_is_reduce) by Paul Fioravanti.
 
-<!-- livebook:{"attrs":{"source":"YouTube.new(\"https://www.youtube.com/watch?v=OQrfedclHfk\")","title":"Everything Is Reduce"},"chunks":null,"kind":"Elixir.HiddenCell","livebook_object":"smart_cell"} -->
+<!-- livebook:{"attrs":"eyJzb3VyY2UiOiJZb3VUdWJlLm5ldyhcImh0dHBzOi8vd3d3LnlvdXR1YmUuY29tL3dhdGNoP3Y9T1FyZmVkY2xIZmtcIikiLCJ0aXRsZSI6IkV2ZXJ5dGhpbmcgSXMgUmVkdWNlIn0","chunks":null,"kind":"Elixir.HiddenCell","livebook_object":"smart_cell"} -->
 
 ```elixir
 YouTube.new("https://www.youtube.com/watch?v=OQrfedclHfk")
@@ -203,7 +203,12 @@ end)
 </details>
 
 ```elixir
+int = 1_234_321
+int_list = Integer.digits(int)
 
+Enum.reduce(int_list, %{}, fn n, acc ->
+  Map.update(acc, n, 1, &(&1 + 1))
+end)
 ```
 
 ## Multiple Accumulators
