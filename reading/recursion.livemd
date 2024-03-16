@@ -82,7 +82,7 @@ flowchart LR
 
 Computerphile explains recursion in excellent detail.
 
-<!-- livebook:{"attrs":{"source":"YouTube.new(\"https://www.youtube.com/watch?v=Mv9NEXX1VHc\")","title":"Computerphile: Recursion"},"chunks":null,"kind":"Elixir.HiddenCell","livebook_object":"smart_cell"} -->
+<!-- livebook:{"attrs":"eyJzb3VyY2UiOiJZb3VUdWJlLm5ldyhcImh0dHBzOi8vd3d3LnlvdXR1YmUuY29tL3dhdGNoP3Y9TXY5TkVYWDFWSGNcIikiLCJ0aXRsZSI6IkNvbXB1dGVycGhpbGU6IFJlY3Vyc2lvbiJ9","chunks":null,"kind":"Elixir.HiddenCell","livebook_object":"smart_cell"} -->
 
 ```elixir
 YouTube.new("https://www.youtube.com/watch?v=Mv9NEXX1VHc")

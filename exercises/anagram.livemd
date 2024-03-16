@@ -129,8 +129,74 @@ defmodule AnagramSolver do
     ["abc", "acb", "bac", "bca", "cab", "cba"]
   """
   def solve(string) do
+    funa(String.split(string, "", trim: true))
+    # |> Enum.reduce()
+  end
+
+  def funa(array) do
+    case array do
+      [one] ->
+        one
+
+      _ ->
+        li = Enum.with_index(array)
+
+        Enum.reduce(li, [], fn {c, i}, acc ->
+          a =
+            li
+            |> Enum.filter(fn {_c1, i1} -> i1 !== i end)
+            |> Enum.map(fn {c2, _i2} -> c2 end)
+
+          IO.inspect(acc)
+
+          case funa(a) do
+            [one] -> [[c, one] | acc]
+            a -> [[c | a] | acc]
+          end
+        end)
+        |> Enum.reverse()
+    end
+
+    # Enum.map(li, fn {c, i} ->
+    #   a =
+    #     li
+    #     |> Enum.filter(fn {_c1, i1} -> i1 !== i end)
+    #     |> Enum.map(fn {c2, _i2} -> c2 end)
+
+    #   a = funa(a)
+    #   [[c | a]]
+    # end)
   end
 end
+
+# funa = fn s ->
+#   li = Enum.with_index(s)
+
+#   Enum.map(li, fn {c, i} ->
+#     a =
+#       li
+#       |> Enum.filter(fn {_c1, i1} -> i1 !== i end)
+#       |> Enum.map(fn {c2, _i2} -> c2 end)
+#       |> a = recur.(a)
+
+#     {c, i, a}
+#   end)
+# end
+
+# a = fn s ->
+#   li =
+#     s
+#     |> String.split("", trim: true)
+#     |> Enum.with_index()
+
+#   Enum.map(li, fn {c, i} ->
+#     [c | 
+#      Enum.filter(li, fn {_c1, i1} -> i1 !== i end)
+#      |> Enum.map(fn {c2, _i2} -> c2 end)]
+#   end)
+# end
+
+AnagramSolver.solve("abcd")
 ```
 
 ## Commit Your Progress
