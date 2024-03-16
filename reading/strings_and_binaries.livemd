@@ -81,7 +81,7 @@ the left when it reaches `10` in base 10 or `2` in base 2.
 
 Here's a table of binary numbers and their corresponding integer values.
 
-<!-- livebook:{"attrs":{"source":"Enum.map(1..300, fn integer ->\n  binary = Integer.digits(integer, 2) |> Enum.join() |> String.to_integer()\n  %{base10: integer, base2: binary}\nend) |> Kino.DataTable.new()","title":"Base2 Conversion Table"},"chunks":null,"kind":"Elixir.HiddenCell","livebook_object":"smart_cell"} -->
+<!-- livebook:{"attrs":"eyJzb3VyY2UiOiJFbnVtLm1hcCgxLi4zMDAsIGZuIGludGVnZXIgLT5cbiAgYmluYXJ5ID0gSW50ZWdlci5kaWdpdHMoaW50ZWdlciwgMikgfD4gRW51bS5qb2luKCkgfD4gU3RyaW5nLnRvX2ludGVnZXIoKVxuICAle2Jhc2UxMDogaW50ZWdlciwgYmFzZTI6IGJpbmFyeX1cbmVuZCkgfD4gS2luby5EYXRhVGFibGUubmV3KCkiLCJ0aXRsZSI6IkJhc2UyIENvbnZlcnNpb24gVGFibGUifQ","chunks":null,"kind":"Elixir.HiddenCell","livebook_object":"smart_cell"} -->
 
 ```elixir
 Enum.map(1..300, fn integer ->
@@ -117,7 +117,7 @@ We've already seen we can find the code point of a character using `?` in Elixir
 Here we can see a table of alphabetical characters and their code points. Notice that capital letters and
 lowercase letters have different code points.
 
-<!-- livebook:{"attrs":{"source":"\"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz\"\n|> String.codepoints()\n|> Enum.map(fn char ->\n  <<code_point::utf8>> = char\n  %{character: char, code_point: code_point}\nend) |> Kino.DataTable.new()","title":"Code Points"},"chunks":null,"kind":"Elixir.HiddenCell","livebook_object":"smart_cell"} -->
+<!-- livebook:{"attrs":"eyJzb3VyY2UiOiJcIkFCQ0RFRkdISUpLTE1OT1BRUlNUVVZXWFlaYWJjZGVmZ2hpamtsbW5vcHFyc3R1dnd4eXpcIlxufD4gU3RyaW5nLmNvZGVwb2ludHMoKVxufD4gRW51bS5tYXAoZm4gY2hhciAtPlxuICA8PGNvZGVfcG9pbnQ6OnV0Zjg+PiA9IGNoYXJcbiAgJXtjaGFyYWN0ZXI6IGNoYXIsIGNvZGVfcG9pbnQ6IGNvZGVfcG9pbnR9XG5lbmQpIHw+IEtpbm8uRGF0YVRhYmxlLm5ldygpIiwidGl0bGUiOiJDb2RlIFBvaW50cyJ9","chunks":null,"kind":"Elixir.HiddenCell","livebook_object":"smart_cell"} -->
 
 ```elixir
 "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
@@ -230,13 +230,13 @@ String.graphemes("é")
 Use [String.graphemes/1](https://hexdocs.pm/elixir/String.html#graphemes/1) to convert the [woman fire fighter](https://emojipedia.org/woman-firefighter/) emoji 👩‍🚒 to a list of graphemes.
 
 ```elixir
-
+String.graphemes("👩‍🚒")
 ```
 
 Use [String.codepoints/1](https://hexdocs.pm/elixir/String.html#codepoints/1) to convert the emoji 👩‍🚒 into a list of codepoints. You'll notice it's actually a combination of the 👩 and 🚒 emojis.
 
 ```elixir
-
+String.codepoints("👩‍🚒")
 ```
 
 ## Hexadecimal
@@ -251,7 +251,7 @@ sixteen symbols (0-9 a-f).
 
 Hexadecimal uses decimal symbols from `1` to `9`. Then switches to using the letters `a` to `f` as you can see in the following table.
 
-<!-- livebook:{"attrs":{"source":"\"0,1,2,3,4,5,6,7,8,9,a,b,c,d,e,f\"\n|> String.split(\",\")\n|> Enum.with_index()\n|> Enum.map(fn {symbol, index} -> %{integer: \"#{index}\", hexadecimal: symbol} end)\n|> Enum.take(-10)\n|> Kino.DataTable.new()","title":"Hexadecimal"},"chunks":null,"kind":"Elixir.HiddenCell","livebook_object":"smart_cell"} -->
+<!-- livebook:{"attrs":"eyJzb3VyY2UiOiJcIjAsMSwyLDMsNCw1LDYsNyw4LDksYSxiLGMsZCxlLGZcIlxufD4gU3RyaW5nLnNwbGl0KFwiLFwiKVxufD4gRW51bS53aXRoX2luZGV4KClcbnw+IEVudW0ubWFwKGZuIHtzeW1ib2wsIGluZGV4fSAtPiAle2ludGVnZXI6IFwiI3tpbmRleH1cIiwgaGV4YWRlY2ltYWw6IHN5bWJvbH0gZW5kKVxufD4gRW51bS50YWtlKC0xMClcbnw+IEtpbm8uRGF0YVRhYmxlLm5ldygpIiwidGl0bGUiOiJIZXhhZGVjaW1hbCJ9","chunks":null,"kind":"Elixir.HiddenCell","livebook_object":"smart_cell"} -->
 
 ```elixir
 "0,1,2,3,4,5,6,7,8,9,a,b,c,d,e,f"
@@ -372,7 +372,7 @@ not be interpreted as a charlist.
 You can define a charlist using single quotes `''`.
 
 ```elixir
-'hello'
+~c"hello"
 ```
 
 This charlist is equivalent to a list of the code points for a string.
@@ -385,13 +385,13 @@ Charlists are a list of integers, so they can be enumerated through and will ret
 charlist. Here's how we could shift each character up one code point.
 
 ```elixir
-Enum.map('abcde', fn each -> each + 1 end)
+Enum.map(~c"abcde", fn each -> each + 1 end)
 ```
 
 You can convert a charlist back into a string with [List.to_string/1](https://hexdocs.pm/elixir/List.html#to_string/1).
 
 ```elixir
-List.to_string('hello')
+List.to_string(~c"hello")
 ```
 
 Or convert a string into a charlist with [String.to_charlist/1](https://hexdocs.pm/elixir/String.html#to_charlist/1).
