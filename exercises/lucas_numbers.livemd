@@ -37,7 +37,7 @@ This exercise was inspired by [Exercism.io](https://exercism.org/tracks/elixir/e
 Lucas numbers are much like the fibonacci sequence where $fib(n) = fib(n - 1) + fib(n - 2)$
 Numberphile has a great video that explains them in further detail,
 
-<!-- livebook:{"attrs":{"source":"YouTube.new(\"https://www.youtube.com/watch?v=PeUbRXnbmms\")","title":"Lucas Numbers"},"chunks":null,"kind":"Elixir.HiddenCell","livebook_object":"smart_cell"} -->
+<!-- livebook:{"attrs":"eyJzb3VyY2UiOiJZb3VUdWJlLm5ldyhcImh0dHBzOi8vd3d3LnlvdXR1YmUuY29tL3dhdGNoP3Y9UGVVYlJYbmJtbXNcIikiLCJ0aXRsZSI6Ikx1Y2FzIE51bWJlcnMifQ","chunks":null,"kind":"Elixir.HiddenCell","livebook_object":"smart_cell"} -->
 
 ```elixir
 YouTube.new("https://www.youtube.com/watch?v=PeUbRXnbmms")
@@ -134,6 +134,11 @@ defmodule Lucas do
     15127
   """
   def number(n) do
+    case n do
+      0 -> 2
+      1 -> 1
+      _ -> number(n - 1) + number(n - 2)
+    end
   end
 
   @doc """
@@ -158,6 +163,7 @@ defmodule Lucas do
   """
 
   def sequence(length) do
+    Enum.map(1..length, &number(&1 - 1))
   end
 end
 ```
