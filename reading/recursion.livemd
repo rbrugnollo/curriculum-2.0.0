@@ -260,7 +260,15 @@ end
 
 ```elixir
 defmodule CountDown do
+  def count(0), do: IO.puts(0)
+
+  def count(n) do
+    IO.puts(n)
+    count(n - 1)
+  end
 end
+
+CountDown.count(5)
 ```
 
 ### Your Turn
@@ -323,7 +331,18 @@ end
 
 ```elixir
 defmodule CountBetween do
+  def count(n1, n2) do
+    IO.puts(n1)
+
+    cond do
+      n1 > n2 -> count(n1 - 1, n2)
+      n2 > n1 -> count(n1 + 1, n2)
+      true -> nil
+    end
+  end
 end
+
+CountBetween.count(5, 10)
 ```
 
 ## Commit Your Progress
