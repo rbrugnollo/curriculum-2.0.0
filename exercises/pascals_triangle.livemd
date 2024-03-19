@@ -170,10 +170,26 @@ defmodule Pascal do
       iex> Pascal.of(1)
       [[1]]
 
+      iex> Pascal.of(2)
+      [[1], [1, 1]]
+
+      iex> Pascal.of(3)
+      [[1], [1, 1], [1, 2, 1]]
+
       iex> Pascal.of(5)
       [[1], [1, 1], [1, 2, 1], [1, 3, 3, 1], [1, 4, 6, 4, 1]]
   """
+  def of(1), do: [[1]]
+  def of(2), do: [[1], [1, 1]]
+
   def of(n) do
+    Enum.reduce(3..n, [[1, 1], [1]], fn _, [prev | _] = acc ->
+      row =
+        [1 | Enum.chunk_every(prev, 2, 1, :discard) |> Enum.map(fn [a, b] -> a + b end)] ++ [1]
+
+      [row | acc]
+    end)
+    |> Enum.reverse()
   end
 end
 ```
