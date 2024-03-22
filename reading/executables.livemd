@@ -115,7 +115,7 @@ OptionParser.parse(["--flag=true"], switches: [flag: :boolean])
 If the `:boolean` type is given, flags are true by default when provided.
 
 ```elixir
-OptionParser.parse(["--flag=true"], switches: [flag: :boolean])
+OptionParser.parse(["--flag"], switches: [flag: :boolean])
 ```
 
 Or we can set them to false.
