@@ -38,14 +38,11 @@ defmodule Games.Wordle do
   defp colored_feedback(colors, guess) do
     colored_text =
       Enum.zip(colors, String.split(guess, "", trim: true))
-      |> Enum.map_join(
-        fn
-          {:green, char} -> IO.ANSI.green() <> char
-          {:yellow, char} -> IO.ANSI.yellow() <> char
-          {:grey, char} -> IO.ANSI.light_black() <> char
-        end,
-        ""
-      )
+      |> Enum.map_join("", fn
+        {:green, char} -> IO.ANSI.green() <> char
+        {:yellow, char} -> IO.ANSI.yellow() <> char
+        {:gray, char} -> IO.ANSI.light_black() <> char
+      end)
 
     colored_text <> IO.ANSI.reset()
   end
