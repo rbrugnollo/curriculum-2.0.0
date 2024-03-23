@@ -245,9 +245,12 @@ end
 
 ```elixir
 defmodule Say do
-  def hello(name) do
+  def hello(name) when is_bitstring(name) do
+    "Hello, #{name}!"
   end
 end
+
+Say.hello("Stephen")
 ```
 
 ### Your Turn
@@ -289,7 +292,10 @@ Enter your solution below.
 
 ```elixir
 defmodule Percent do
+  defguard is_valid_number(percent) when is_number(percent) and percent > 0 and percent <= 100
+
   def display(percent) do
+    "#{percent}%"
   end
 end
 ```
