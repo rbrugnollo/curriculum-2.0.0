@@ -83,8 +83,40 @@ end
 
 ```elixir
 defmodule Metric do
-  def convert(from, to) do
-  end
+  @moduledoc """
+  Metric is mainly used to convert unit values
+  """
+  @type unit :: :millimeter | :centimeter | :meter | :kilometer
+
+  @doc """
+  Convert metrics
+
+  ## Examples
+    iex> Metric.convert({:millimeter, 100.0}, :millimeter)
+    100.0
+    iex> Metric.convert({:millimeter, 100.0}, :centimeter)
+    1.0
+    iex> Metric.convert({:millimeter, 100.0}, :meter)
+    0.01
+    iex> Metric.convert({:millimeter, 100.0}, :kilometer)
+    0.0001
+    # iex> Metric.convert({:centimeter, 100.0}, :meter)
+    # 1.0
+  """
+  @spec convert({unit(), float()}, unit()) :: float()
+  def convert({unitFrom, value}, unitTo) when unitFrom === unitTo, do: value
+  def convert({:millimeter, value}, :centimeter), do: value / 100
+  def convert({:millimeter, value}, :meter), do: value / 100 / 100
+  def convert({:millimeter, value}, :kilometer), do: value / 100 / 100 / 100
+  def convert({:centimeter, value}, :millimeter), do: value * 100
+  def convert({:centimeter, value}, :meter), do: value / 100
+  def convert({:centimeter, value}, :kilometer), do: value / 100 / 100
+  def convert({:meter, value}, :millimeter), do: value * 100 * 100
+  def convert({:meter, value}, :centimeter), do: value * 100
+  def convert({:meter, value}, :kilometer), do: value / 100
+  def convert({:kilometer, value}, :millimeter), do: value * 100 * 100
+  def convert({:kilometer, value}, :centimeter), do: value * 100 * 100
+  def convert({:kilometer, value}, :meter), do: value * 100 * 100
 end
 ```
 
