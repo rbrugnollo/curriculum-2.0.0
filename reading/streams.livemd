@@ -54,7 +54,7 @@ memory during execution.
 
 Each [Enum](https://hexdocs.pm/elixir/Enum.html) function stores a copy of the the enumerable it creates and executes sequentially as seen in this diagram.
 
-<!-- livebook:{"attrs":{"source":"box = fn value, color ->\n  \"<div style='height: 3rem; width: 3rem; background-color: #{color}; display: flex; color: white; justify-content: center; align-items: center;'>#{value}</div>\"\nend\n\nget_color = fn in_memory ->\n  if in_memory, do: \"green\", else: \"lightgray\"\nend\n\nKino.animate(1000, 1, fn _, row ->\n  md =\n    Kino.Markdown.new(\"\"\"\n    <div style=\"display: grid; grid-template-columns: max-content repeat(10, 3rem);gap: 1rem;\">\n      <p>1..10:</p>#{Enum.map(1..10, fn index -> box.(index, get_color.(row >= 0)) end)}\n      <p>Enum.map</p>#{Enum.map(1..10, fn index -> box.(index * 2, get_color.(row >= 1)) end)}\n      <p>Enum.filter</p>#{Enum.map(1..10, fn index -> box.(index * 2, get_color.(index <= 5 and row >= 2)) end)}\n      <p>Enum.take</p>#{Enum.map(1..10, fn index -> box.(index * 2, get_color.(index <= 4 and row >= 3)) end)}\n    </div>\n\n    \"\"\")\n\n  {:cont, md, rem(row + 1, 4)}\nend)","title":"Enum Memory Usage"},"chunks":null,"kind":"Elixir.HiddenCell","livebook_object":"smart_cell"} -->
+<!-- livebook:{"attrs":"eyJzb3VyY2UiOiJib3ggPSBmbiB2YWx1ZSwgY29sb3IgLT5cbiAgXCI8ZGl2IHN0eWxlPSdoZWlnaHQ6IDNyZW07IHdpZHRoOiAzcmVtOyBiYWNrZ3JvdW5kLWNvbG9yOiAje2NvbG9yfTsgZGlzcGxheTogZmxleDsgY29sb3I6IHdoaXRlOyBqdXN0aWZ5LWNvbnRlbnQ6IGNlbnRlcjsgYWxpZ24taXRlbXM6IGNlbnRlcjsnPiN7dmFsdWV9PC9kaXY+XCJcbmVuZFxuXG5nZXRfY29sb3IgPSBmbiBpbl9tZW1vcnkgLT5cbiAgaWYgaW5fbWVtb3J5LCBkbzogXCJncmVlblwiLCBlbHNlOiBcImxpZ2h0Z3JheVwiXG5lbmRcblxuS2luby5hbmltYXRlKDEwMDAsIDEsIGZuIF8sIHJvdyAtPlxuICBtZCA9XG4gICAgS2luby5NYXJrZG93bi5uZXcoXCJcIlwiXG4gICAgPGRpdiBzdHlsZT1cImRpc3BsYXk6IGdyaWQ7IGdyaWQtdGVtcGxhdGUtY29sdW1uczogbWF4LWNvbnRlbnQgcmVwZWF0KDEwLCAzcmVtKTtnYXA6IDFyZW07XCI+XG4gICAgICA8cD4xLi4xMDo8L3A+I3tFbnVtLm1hcCgxLi4xMCwgZm4gaW5kZXggLT4gYm94LihpbmRleCwgZ2V0X2NvbG9yLihyb3cgPj0gMCkpIGVuZCl9XG4gICAgICA8cD5FbnVtLm1hcDwvcD4je0VudW0ubWFwKDEuLjEwLCBmbiBpbmRleCAtPiBib3guKGluZGV4ICogMiwgZ2V0X2NvbG9yLihyb3cgPj0gMSkpIGVuZCl9XG4gICAgICA8cD5FbnVtLmZpbHRlcjwvcD4je0VudW0ubWFwKDEuLjEwLCBmbiBpbmRleCAtPiBib3guKGluZGV4ICogMiwgZ2V0X2NvbG9yLihpbmRleCA8PSA1IGFuZCByb3cgPj0gMikpIGVuZCl9XG4gICAgICA8cD5FbnVtLnRha2U8L3A+I3tFbnVtLm1hcCgxLi4xMCwgZm4gaW5kZXggLT4gYm94LihpbmRleCAqIDIsIGdldF9jb2xvci4oaW5kZXggPD0gNCBhbmQgcm93ID49IDMpKSBlbmQpfVxuICAgIDwvZGl2PlxuXG4gICAgXCJcIlwiKVxuXG4gIHs6Y29udCwgbWQsIHJlbShyb3cgKyAxLCA0KX1cbmVuZCkiLCJ0aXRsZSI6IkVudW0gTWVtb3J5IFVzYWdlIn0","chunks":null,"kind":"Elixir.HiddenCell","livebook_object":"smart_cell"} -->
 
 ```elixir
 box = fn value, color ->
@@ -87,7 +87,7 @@ It's a waste of resources to execute every operation on every element. It would 
 
 By using Streams and Lazy evaluation, we can massively improve memory usage as seen in the animation below.
 
-<!-- livebook:{"attrs":{"source":"box = fn value, color ->\n  \"<div style='height: 3rem; width: 3rem; background-color: #{color}; display: flex; color: white; justify-content: center; align-items: center;'>#{value}</div>\"\nend\n\nget_color = fn in_memory ->\n  if in_memory, do: \"green\", else: \"lightgray\"\nend\n\nKino.animate(500, {1, 1}, fn _, {column, row} = position ->\n  md =\n    Kino.Markdown.new(\"\"\"\n    <div style=\"display: grid; grid-template-columns: max-content repeat(10, 3rem);gap: 1rem;\">\n      <p>In Memory:</p>#{Enum.map(1..10, fn index -> box.(index, get_color.(row == 1 and column == index)) end)}\n      <p>In Memory:</p>#{Enum.map(1..10, fn index -> box.(index * 2, get_color.(row == 2 and column == index)) end)}\n      <p>In Memory:</p>#{Enum.map(1..10, fn index -> box.(index * 2, get_color.(row == 3 and column == index)) end)}\n      <p>In Memory:</p>#{Enum.map(1..10, fn index -> box.(index * 2, get_color.(column > index || (row == 4 and column == index))) end)}\n    </div>\n    \"\"\")\n\n  next_position =\n    case position do\n      {4, 4} -> {1, 1}\n      {column, 4} -> {column + 1, 1}\n      {column, row} -> {column, row + 1}\n    end\n\n  {:cont, md, next_position}\nend)","title":"Stream Memory Usage"},"chunks":null,"kind":"Elixir.HiddenCell","livebook_object":"smart_cell"} -->
+<!-- livebook:{"attrs":"eyJzb3VyY2UiOiJib3ggPSBmbiB2YWx1ZSwgY29sb3IgLT5cbiAgXCI8ZGl2IHN0eWxlPSdoZWlnaHQ6IDNyZW07IHdpZHRoOiAzcmVtOyBiYWNrZ3JvdW5kLWNvbG9yOiAje2NvbG9yfTsgZGlzcGxheTogZmxleDsgY29sb3I6IHdoaXRlOyBqdXN0aWZ5LWNvbnRlbnQ6IGNlbnRlcjsgYWxpZ24taXRlbXM6IGNlbnRlcjsnPiN7dmFsdWV9PC9kaXY+XCJcbmVuZFxuXG5nZXRfY29sb3IgPSBmbiBpbl9tZW1vcnkgLT5cbiAgaWYgaW5fbWVtb3J5LCBkbzogXCJncmVlblwiLCBlbHNlOiBcImxpZ2h0Z3JheVwiXG5lbmRcblxuS2luby5hbmltYXRlKDUwMCwgezEsIDF9LCBmbiBfLCB7Y29sdW1uLCByb3d9ID0gcG9zaXRpb24gLT5cbiAgbWQgPVxuICAgIEtpbm8uTWFya2Rvd24ubmV3KFwiXCJcIlxuICAgIDxkaXYgc3R5bGU9XCJkaXNwbGF5OiBncmlkOyBncmlkLXRlbXBsYXRlLWNvbHVtbnM6IG1heC1jb250ZW50IHJlcGVhdCgxMCwgM3JlbSk7Z2FwOiAxcmVtO1wiPlxuICAgICAgPHA+SW4gTWVtb3J5OjwvcD4je0VudW0ubWFwKDEuLjEwLCBmbiBpbmRleCAtPiBib3guKGluZGV4LCBnZXRfY29sb3IuKHJvdyA9PSAxIGFuZCBjb2x1bW4gPT0gaW5kZXgpKSBlbmQpfVxuICAgICAgPHA+SW4gTWVtb3J5OjwvcD4je0VudW0ubWFwKDEuLjEwLCBmbiBpbmRleCAtPiBib3guKGluZGV4ICogMiwgZ2V0X2NvbG9yLihyb3cgPT0gMiBhbmQgY29sdW1uID09IGluZGV4KSkgZW5kKX1cbiAgICAgIDxwPkluIE1lbW9yeTo8L3A+I3tFbnVtLm1hcCgxLi4xMCwgZm4gaW5kZXggLT4gYm94LihpbmRleCAqIDIsIGdldF9jb2xvci4ocm93ID09IDMgYW5kIGNvbHVtbiA9PSBpbmRleCkpIGVuZCl9XG4gICAgICA8cD5JbiBNZW1vcnk6PC9wPiN7RW51bS5tYXAoMS4uMTAsIGZuIGluZGV4IC0+IGJveC4oaW5kZXggKiAyLCBnZXRfY29sb3IuKGNvbHVtbiA+IGluZGV4IHx8IChyb3cgPT0gNCBhbmQgY29sdW1uID09IGluZGV4KSkpIGVuZCl9XG4gICAgPC9kaXY+XG4gICAgXCJcIlwiKVxuXG4gIG5leHRfcG9zaXRpb24gPVxuICAgIGNhc2UgcG9zaXRpb24gZG9cbiAgICAgIHs0LCA0fSAtPiB7MSwgMX1cbiAgICAgIHtjb2x1bW4sIDR9IC0+IHtjb2x1bW4gKyAxLCAxfVxuICAgICAge2NvbHVtbiwgcm93fSAtPiB7Y29sdW1uLCByb3cgKyAxfVxuICAgIGVuZFxuXG4gIHs6Y29udCwgbWQsIG5leHRfcG9zaXRpb259XG5lbmQpIiwidGl0bGUiOiJTdHJlYW0gTWVtb3J5IFVzYWdlIn0","chunks":null,"kind":"Elixir.HiddenCell","livebook_object":"smart_cell"} -->
 
 ```elixir
 box = fn value, color ->
@@ -131,7 +131,7 @@ Notice that the following does not execute, it instead builds up future work to 
 1..10
 |> Stream.map(fn each -> each * 2 end)
 |> Stream.filter(fn each -> each <= 10 end)
-|> Stream.take(4)
+|> Stream.take(4)ea
 ```
 
 The Stream stores the enumerable, and the list of functions to call on it. The Stream will only evaluate
@@ -230,7 +230,11 @@ In the Elixir cell below, try refactoring this code using the [Stream](https://h
 ```
 
 ```elixir
-
+1..100
+|> Stream.map(fn each -> div(each, 2) end)
+|> Stream.map(fn each -> each * 3 end)
+|> Stream.filter(fn each -> rem(each, 2) === 0 end)
+|> Enum.to_list()
 ```
 
 ## Stream Gotchas
@@ -430,7 +434,14 @@ end)
 </details>
 
 ```elixir
-
+Stream.iterate(99, fn acc ->
+  case rem(acc, 2) do
+    0 -> div(acc, 2)
+    1 -> acc * 3 + 1
+  end
+end)
+|> Enum.take_while(fn e -> e !== 4 end)
+|> Enum.count()
 ```
 
 ### Stream.unfold/2
@@ -491,7 +502,10 @@ end)
 </details>
 
 ```elixir
-
+Stream.unfold(1, fn acc ->
+  {acc ** 3, acc + 1}
+end)
+|> Enum.take(20)
 ```
 
 ## Commit Your Progress
