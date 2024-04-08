@@ -67,6 +67,7 @@ Implement the `TodoList` module as documented. You may choose any file for your 
 
 ```elixir
 defmodule TodoList do
+  @filename "todolist2"
   @moduledoc """
   Documentation for `TodoList`
   """
@@ -79,6 +80,10 @@ defmodule TodoList do
       []
   """
   def list do
+    case File.read(@filename) do
+      {:ok, binary} -> :erlang.binary_to_term(binary)
+      _ -> []
+    end
   end
 
   @doc """
@@ -92,6 +97,7 @@ defmodule TodoList do
       ["task 2", "task 1"]
   """
   def add(item) do
+    save([item | list()])
   end
 
   @doc """
@@ -105,6 +111,11 @@ defmodule TodoList do
       ["task 2", "task 1"]
   """
   def complete(item) do
+    save(list() -- [item])
+  end
+
+  defp save(todolist) do
+    File.write!(@filename, :erlang.term_to_binary(todolist))
   end
 end
 ```
