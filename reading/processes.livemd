@@ -48,7 +48,7 @@ Upon completing this lesson, a student should be able to answer the following qu
 
 For an introduction to processes, how they work under the hood, and why that matters, we recommend the exceptional talk by Sasa Juric: "The Soul of Erlang."
 
-<!-- livebook:{"attrs":{"source":"YouTube.new(\"https://www.youtube.com/watch?v=JvBT4XBdoUE\")","title":"The Soul of Erlang and Elixir • Sasa Juric • GOTO 2019"},"chunks":null,"kind":"Elixir.HiddenCell","livebook_object":"smart_cell"} -->
+<!-- livebook:{"attrs":"eyJzb3VyY2UiOiJZb3VUdWJlLm5ldyhcImh0dHBzOi8vd3d3LnlvdXR1YmUuY29tL3dhdGNoP3Y9SnZCVDRYQmRvVUVcIikiLCJ0aXRsZSI6IlRoZSBTb3VsIG9mIEVybGFuZyBhbmQgRWxpeGlyIOKAoiBTYXNhIEp1cmljIOKAoiBHT1RPIDIwMTkifQ","chunks":null,"kind":"Elixir.HiddenCell","livebook_object":"smart_cell"} -->
 
 ```elixir
 YouTube.new("https://www.youtube.com/watch?v=JvBT4XBdoUE")
@@ -224,7 +224,8 @@ Spawn a linked process and crash this Elixir cell below.
 Comment out your solution when complete to avoid continuously crashing the livebook!
 
 ```elixir
-
+# pid = spawn_link(fn -> raise "crash" end)
+"not working"
 ```
 
 ## Message Passing
@@ -270,7 +271,14 @@ In the Elixir cell below, spawn a new process and send it a message `{:hello, "w
 `IO.puts` the message's payload where `"world"` is the payload.
 
 ```elixir
+pid1 =
+  spawn(fn ->
+    receive do
+      {:hello, message} -> IO.puts(message)
+    end
+  end)
 
+send(pid1, {:hello, "Rafael2"})
 ```
 
 ## State
@@ -310,6 +318,9 @@ defmodule ServerProcess do
 end
 
 server_process = spawn(fn -> ServerProcess.loop() end)
+send(server_process, "message")
+send(server_process, "message")
+send(server_process, "message")
 ```
 
 We've used [Enum.random/1](https://hexdocs.pm/elixir/Enum.html#random/1) to show that the process continues to loop and receive messages.
@@ -375,6 +386,7 @@ defmodule Counter do
 
     receive do
       :increment -> loop(state + 1)
+      :decrement -> loop(state - 1)
     end
   end
 end
@@ -385,7 +397,7 @@ counter_process = spawn(fn -> Counter.loop() end)
 You should be able to send a `:decrement` message to a spawned `Counter`. Uncomment and evaluate the code below to test your solution.
 
 ```elixir
-# send(counter_process, :decrement)
+send(counter_process, :decrement)
 ```
 
 ## Commit Your Progress
