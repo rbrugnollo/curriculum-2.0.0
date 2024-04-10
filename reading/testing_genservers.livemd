@@ -200,7 +200,7 @@ ExUnit.run()
 
 For more on testing [GenServer](https://hexdocs.pm/elixir/GenServer.html)s, there is an excellent talk by Tyler Young.
 
-<!-- livebook:{"attrs":{"source":"YouTube.new(\"https://www.youtube.com/watch?v=EZFLPG7V7RM\")","title":"Testing GenServers"},"chunks":null,"kind":"Elixir.HiddenCell","livebook_object":"smart_cell"} -->
+<!-- livebook:{"attrs":"eyJzb3VyY2UiOiJZb3VUdWJlLm5ldyhcImh0dHBzOi8vd3d3LnlvdXR1YmUuY29tL3dhdGNoP3Y9RVpGTFBHN1Y3Uk1cIikiLCJ0aXRsZSI6IlRlc3RpbmcgR2VuU2VydmVycyJ9","chunks":null,"kind":"Elixir.HiddenCell","livebook_object":"smart_cell"} -->
 
 ```elixir
 YouTube.new("https://www.youtube.com/watch?v=EZFLPG7V7RM")
@@ -216,29 +216,34 @@ defmodule CountDown do
 
   # Client
 
-  def start_link(_opts) do
-    # Implementation
+  def start_link() do
+    GenServer.start_link(__MODULE__, [], [])
   end
 
   def decrement(pid) do
-    # Implementation
+    GenServer.call(pid, :decrement)
+  end
+
+  def get_count(pid) do
+    GenServer.call(pid, :get_count)
   end
 
   # Server
 
   @impl true
-  def init(state) do
-    {:ok, state}
+  def init(_opts) do
+    {:ok, 0}
   end
 
   @impl true
   def handle_call(:get_count, _from, state) do
-    # Implementation
+    new_state = state - 1
+    {:reply, new_state, new_state}
   end
 
   @impl true
   def handle_call(:decrement, _from, state) do
-    # Implementation
+    {:reply, state, state}
   end
 end
 
@@ -248,7 +253,18 @@ defmodule CounterTest do
   use ExUnit.Case
 
   # implement your test
-  test "decrement/1"
+  test "decrement/1" do
+    # arrange
+    {:ok, pid} = CountDown.start_link()
+    expected = -1
+
+    # act
+    CountDown.decrement(pid)
+    result = CountDown.get_count(pid)
+
+    # assert
+    assert result === expected
+  end
 end
 
 ExUnit.run()
