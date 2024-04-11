@@ -107,7 +107,7 @@ The same is true if we manually exit a process using [Process.exit/2](https://he
 
 If you would like to learn more about fault taulerance and error handling, Joe Armstrong created an incredible video on the subject.
 
-<!-- livebook:{"attrs":{"source":"YouTube.new(\"https://www.youtube.com/watch?v=ZOsvgwOR6G0&ab_channel=KentComputing\")","title":"Erlang Master Class 2: Video 3 - Handling errors"},"chunks":null,"kind":"Elixir.HiddenCell","livebook_object":"smart_cell"} -->
+<!-- livebook:{"attrs":"eyJzb3VyY2UiOiJZb3VUdWJlLm5ldyhcImh0dHBzOi8vd3d3LnlvdXR1YmUuY29tL3dhdGNoP3Y9Wk9zdmd3T1I2RzAmYWJfY2hhbm5lbD1LZW50Q29tcHV0aW5nXCIpIiwidGl0bGUiOiJFcmxhbmcgTWFzdGVyIENsYXNzIDI6IFZpZGVvIDMgLSBIYW5kbGluZyBlcnJvcnMifQ","chunks":null,"kind":"Elixir.HiddenCell","livebook_object":"smart_cell"} -->
 
 ```elixir
 YouTube.new("https://www.youtube.com/watch?v=ZOsvgwOR6G0&ab_channel=KentComputing")
@@ -206,7 +206,8 @@ Process.exit(pid, :exit)
 Re-evaluate the diagram above and you should see a new `Worker` process started with a different pid. Repeat this process to kill each process under the supervisor and see them restarted.
 
 ```elixir
-
+# Process.exit(:c.pid(0, 251, 0), :exit)
+Kino.Process.sup_tree(supervisor_pid)
 ```
 
 ## Restart Strategies
@@ -363,7 +364,7 @@ so the timeline of crashes should be:
 Uncomment and run the cell below to see the timeline of crashes, then re-comment it.
 
 ```elixir
-# {:ok, supervisor_pid} = Supervisor.start_link(children, strategy: :one_for_one, max_restarts: 5)
+{:ok, supervisor_pid} = Supervisor.start_link(children, strategy: :one_for_one, max_restarts: 5)
 ```
 
 ### One For All
@@ -384,7 +385,7 @@ Notice that `Bomb2` and `Bomb3` will never explode because their timers restart.
 Uncomment the line below to observe the timeline of crashes, then re-comment it.
 
 ```elixir
-# {:ok, supervisor_pid} = Supervisor.start_link(children, strategy: :one_for_all, max_restarts: 5)
+{:ok, supervisor_pid} = Supervisor.start_link(children, strategy: :one_for_all, max_restarts: 5)
 ```
 
 ### Rest For One
@@ -406,7 +407,7 @@ timeline will still be:
 Uncomment the line below to observe the timeline of crashes, then re-comment it.
 
 ```elixir
-# {:ok, supervisor_pid} = Supervisor.start_link(children, strategy: :rest_for_one, max_restarts: 5)
+{:ok, supervisor_pid} = Supervisor.start_link(children, strategy: :rest_for_one, max_restarts: 5)
 ```
 
 However, if we change the order of children in the supervisor, only children after the crashed
@@ -446,7 +447,23 @@ So the timeline of crashes would be:
 Start **four** `Bomb` processes under a supervisor with different bomb times. Try each restart strategy `:one_for_one`, `one_for_all`, and `:rest_for_one`. Predict the crash timeline then evaluate your code. Did the result match your prediction?
 
 ```elixir
+children2 = [
+  %{
+    id: :bomb15,
+    start: {Bomb, :start_link, [[name: "Bomb raff1", bomb_time: 1000]]}
+  },
+  %{
+    id: :bomb16,
+    start: {Bomb, :start_link, [[name: "Bomb raff2", bomb_time: 2000]]}
+  },
+  %{
+    id: :bomb17,
+    start: {Bomb, :start_link, [[name: "Bomb raff3", bomb_time: 3000]]}
+  }
+]
 
+# 15, 15,16, 15,17, 16  16,17  17
+{:ok, sup_id} = Supervisor.start_link(children2, strategy: :one_for_one, max_restarts: 3)
 ```
 
 ## Syntax Sugar
