@@ -70,7 +70,7 @@ Supervisor.which_children(supervisor_pid)
 
 We can also see that demonstrated in the following diagram.
 
-<!-- livebook:{"attrs":{"source":"Kino.Process.sup_tree(supervisor_pid)","title":"Supervisor Visualization"},"chunks":null,"kind":"Elixir.HiddenCell","livebook_object":"smart_cell"} -->
+<!-- livebook:{"attrs":"eyJzb3VyY2UiOiJLaW5vLlByb2Nlc3Muc3VwX3RyZWUoc3VwZXJ2aXNvcl9waWQpIiwidGl0bGUiOiJTdXBlcnZpc29yIFZpc3VhbGl6YXRpb24ifQ","chunks":null,"kind":"Elixir.HiddenCell","livebook_object":"smart_cell"} -->
 
 ```elixir
 Kino.Process.sup_tree(supervisor_pid)
@@ -109,7 +109,7 @@ tasks =
 
 Evaluate the diagram below to see the tasks spawned under the `MyTaskSupervisor` process.
 
-<!-- livebook:{"attrs":{"source":"Kino.Process.sup_tree(supervisor_pid)","title":"Supervisor Visualization"},"chunks":null,"kind":"Elixir.HiddenCell","livebook_object":"smart_cell"} -->
+<!-- livebook:{"attrs":"eyJzb3VyY2UiOiJLaW5vLlByb2Nlc3Muc3VwX3RyZWUoc3VwZXJ2aXNvcl9waWQpIiwidGl0bGUiOiJTdXBlcnZpc29yIFZpc3VhbGl6YXRpb24ifQ","chunks":null,"kind":"Elixir.HiddenCell","livebook_object":"smart_cell"} -->
 
 ```elixir
 Kino.Process.sup_tree(supervisor_pid)
