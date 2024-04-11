@@ -183,7 +183,23 @@ execution and parallel execution.
 You may consider using [Process.sleep/1](https://hexdocs.pm/elixir/Process.html#sleep/1) to simulate an expensive computation.
 
 ```elixir
+task =
+  Task.async(fn ->
+    Process.sleep(1000)
+    IO.puts("After 1 second")
+    "1 sec"
+  end)
 
+task2 =
+  Task.async(fn ->
+    Process.sleep(2000)
+    IO.puts("After 2 second2")
+    "2 sec"
+  end)
+
+[res1, res2] = Task.await_many([task, task2])
+IO.puts(res1)
+IO.puts(res2)
 ```
 
 ## Awaiting Many Tasks
@@ -254,7 +270,8 @@ In the Elixir cell below, spawn a task which takes one second to complete.
 `await/2` the task and alter the timeout value to be one second. Awaiting the task should crash.
 
 ```elixir
-
+task = Task.async(fn -> Process.sleep(2000) end)
+Task.await(task, 3000)
 ```
 
 ## Further Reading
